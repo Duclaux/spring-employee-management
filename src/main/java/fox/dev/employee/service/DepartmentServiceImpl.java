@@ -43,4 +43,17 @@ public class DepartmentServiceImpl implements DepartmentService{
                 .map(department -> modelMapper.map(department, DepartmentDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public DepartmentDto updateDepartment(DepartmentDto departmentDto, Long id) {
+        Department department = departmentRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Department not found with id:" + id)
+        );
+
+        department.setDepartmentName(departmentDto.getDepartmentName());
+        department.setDepartmentDescription(departmentDto.getDepartmentDescription());
+
+        Department savedDepartment = departmentRepository.save(department);
+        return modelMapper.map(savedDepartment, DepartmentDto.class);
+    }
 }

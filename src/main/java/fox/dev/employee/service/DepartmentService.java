@@ -11,4 +11,6 @@ public interface DepartmentService {
     DepartmentDto getDepartment(Long id);
 
     List<DepartmentDto> getAllDepartments();
+
+    DepartmentDto updateDepartment(DepartmentDto departmentDto, Long id);
 }

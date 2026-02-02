@@ -6,10 +6,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/departements")
@@ -22,5 +21,16 @@ public class DepartmentController {
     public ResponseEntity<DepartmentDto> addDepartment(@RequestBody DepartmentDto departmentDto){
         DepartmentDto savedDepartmentDto = departmentService.addDepartment(departmentDto);
         return new ResponseEntity<>(savedDepartmentDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DepartmentDto> getDepartment(@PathVariable Long id){
+        DepartmentDto departmentDto = departmentService.getDepartment(id);
+        return ResponseEntity.ok(departmentDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DepartmentDto>> getAllDepartments(){
+        return ResponseEntity.ok(departmentService.getAllDepartments());
     }
 }

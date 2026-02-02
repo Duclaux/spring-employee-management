@@ -6,7 +6,6 @@ import fox.dev.employee.exception.ResourceNotFoundException;
 import fox.dev.employee.repository.DepartmentRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,5 +54,13 @@ public class DepartmentServiceImpl implements DepartmentService{
 
         Department savedDepartment = departmentRepository.save(department);
         return modelMapper.map(savedDepartment, DepartmentDto.class);
+    }
+
+    @Override
+    public void deleteDepartment(Long id) {
+        Department department = departmentRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Department not found with id:" + id)
+        );
+        departmentRepository.delete(department);
     }
 }

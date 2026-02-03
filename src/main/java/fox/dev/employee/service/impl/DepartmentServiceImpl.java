@@ -1,9 +1,10 @@
-package fox.dev.employee.service;
+package fox.dev.employee.service.impl;
 
 import fox.dev.employee.dto.DepartmentDto;
 import fox.dev.employee.entity.Department;
 import fox.dev.employee.exception.ResourceNotFoundException;
 import fox.dev.employee.repository.DepartmentRepository;
+import fox.dev.employee.service.DepartmentService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentRepository departmentRepository;
     private ModelMapper modelMapper;
